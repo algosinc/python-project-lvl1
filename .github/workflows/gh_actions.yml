@@ -1,5 +1,5 @@
 # имя, чтобы отображалось в интерфейсе
-name: Python package
+name: Lint with flake8
 
 # тут список событий, на который экшен должен запускаться
 on: [push] # пусть гоняется на любой пуш
@@ -7,9 +7,8 @@ on: [push] # пусть гоняется на любой пуш
 # список того, что нужно делать. каждый job будет выводиться отдельным элементом слева UI
 jobs:
   build:
-
-    steps:
-      - runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:      
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -18,8 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install flake8
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
